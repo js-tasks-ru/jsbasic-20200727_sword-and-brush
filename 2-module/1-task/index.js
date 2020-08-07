@@ -3,6 +3,7 @@
  * @param {Object} salaries - объект зарплат
  * @returns {Number}
  */
-function sumSalary(salaries) {
-  // ваш код...
-}
+let sumSalary = (data) => {
+  return Object.values(data).filter(isNumber => typeof isNumber === "number").reduce((prevSalary, nextSalary) => prevSalary + nextSalary, 0);
+
+};
