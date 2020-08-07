@@ -4,6 +4,6 @@
  * @returns {Number}
  */
 let sumSalary = (data) => {
-  return Object.values(data).filter(item => typeof item === "number").reduce((a, b) => a + b, 0);
+  return Object.values(data).filter(isNumber => typeof isNumber === "number").reduce((prevSalary, nextSalary) => prevSalary + nextSalary, 0);
 
 };
