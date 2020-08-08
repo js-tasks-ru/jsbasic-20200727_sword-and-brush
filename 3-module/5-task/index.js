@@ -4,5 +4,11 @@
  * @returns {{min:number, max:number}}  объект
  */
 function getMinMax(str) {
-  // ваш код...
+  let numArr = str.split(",").join(" ").split(" ").map(toNumber => +toNumber)
+    .filter(isNum => typeof isNum === "number" && !isNaN(isNum));
+
+  return {
+    min: Math.min(...numArr),
+    max: Math.max(...numArr),
+  }
 }
