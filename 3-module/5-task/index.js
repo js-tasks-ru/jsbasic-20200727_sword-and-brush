@@ -5,7 +5,7 @@
  */
 function getMinMax(str) {
   let numArr = str.split(",").join(" ").split(" ").map(toNumber => +toNumber)
-    .filter(isNum => typeof isNum === "number" && !isNaN(isNum));
+    .filter(isNum => !isNaN(isNum));
 
   return {
     min: Math.min(...numArr),
