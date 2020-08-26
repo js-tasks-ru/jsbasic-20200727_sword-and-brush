@@ -17,7 +17,6 @@ export default class ProductCard {
     if (event.target.closest(".card__button")) {
       let event = new CustomEvent("product-add", { bubbles: true, detail: this._id });
       this._elem.dispatchEvent(event);
-      console.log(event.detail);
     }
   }
 
