@@ -14,25 +14,18 @@ function initCarousel() {
     if (value === -(counter * 3)) {
       right.style.display = "none"
     }
-
-    if (value < 0) {
-      left.style.display = "";
-    }
+    left.style.display = "";
   }
 
   let slideLeft = () => {
     slider.style.transform = `translateX(${value += counter}px)`;
 
-    if (value > -(counter * 3)) {
-      right.style.display = "";
-    }
     if (value === 0) {
       left.style.display = "none";
     }
+    right.style.display = "";
   }
 
   right.addEventListener("click", slideRight);
   left.addEventListener("click", slideLeft);
 }
-
-
