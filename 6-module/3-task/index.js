@@ -8,7 +8,6 @@ export default class Carousel {
 
   constructor(slides) {
 
-
     this.slides = slides;
     this._elem = this.render(this.slides);
     this._elem.addEventListener("click", (event) => this.onClick(event));
@@ -17,16 +16,14 @@ export default class Carousel {
     this._curentSlide = 1;
 
     this._slideLenght = this._elem.querySelectorAll(".carousel__slide");
-    console.log(this._slideLenght);
-    console.log(this._slideLenght.length);
 
     this._left = this._elem.querySelector(".carousel__arrow_left");
     this._right = this._elem.querySelector(".carousel__arrow_right");
 
-    this._elem.addEventListener("click", (event) => this.slider(event));
-    this._elem.addEventListener("click", (event) => this.hidden(event));
-  }
+    this._left.style.display = "none";
 
+    this._elem.addEventListener("click", (event) => this.slider(event));
+  }
 
   slider(event) {
     let counter = this._elem.querySelector(".carousel__inner").offsetWidth;
@@ -34,43 +31,37 @@ export default class Carousel {
     if (event.target.closest(".carousel__arrow_left")) {
       this._elem.querySelector(".carousel__inner").style.transform = `translateX(${this._value += counter}px)`;
       this._curentSlide -= 1;
-      console.log(this._curentSlide);
+
+      if (this._curentSlide === 1) {
+        this._left.style.display = "none";
+      }
+      else if (this._curentSlide !== this._slideLenght.length) {
+        this._right.style.display = "";
+      } else {
+        this._left.style.display = "";
+      }
     }
 
     if (event.target.closest(".carousel__arrow_right")) {
       this._elem.querySelector(".carousel__inner").style.transform = `translateX(${this._value -= counter}px)`;
       this._curentSlide += 1;
-      console.log(this._curentSlide);
-    }
-  }
-
-
-  hidden(event) {
-
-    if (event.target.closest(".carousel__arrow_left")) {
-      if (this._curentSlide === 1) {
-        this._left.style.display = "none";
-      }
-      this._left.style.display = "";
-    }
-
-
-    if (event.target.closest(".carousel__arrow_right")) {
 
       if (this._curentSlide === this._slideLenght.length) {
         this._right.style.display = "none";
+      } else if (this._curentSlide !== 1) {
+        this._left.style.display = "";
+      } else {
+        this._right.style.display = "";
       }
-      this._right.style.display = "";
     }
   }
 
   onClick(event) {
     if (event.target.closest(".carousel__button")) {
-      let event = new CustomEvent("product-add", { bubbles: true, detail: this.slides.id });
+      let event = new CustomEvent("product-add", { bubbles: true, detail: this.slides[0].id });
       this._elem.dispatchEvent(event);
     }
   }
-
 
   render(slides) {
 
@@ -85,17 +76,14 @@ export default class Carousel {
     </div>
     `);
 
-
     let divCarouselInner = document.createElement("div");
     divCarouselInner.classList.add("carousel__inner");
-
 
     for (const value of slides) {
 
       let divCarouselSlide = document.createElement("div");
       divCarouselSlide.classList.add("carousel__slide");
       divCarouselSlide.setAttribute("data-id", `${value.id}`);
-
 
       divCarouselSlide.insertAdjacentHTML("afterbegin", `
       <img src="/assets/images/carousel/${value.image}" class="carousel__img" alt="slide">
