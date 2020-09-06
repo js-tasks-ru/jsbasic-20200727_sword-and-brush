@@ -2,7 +2,6 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Modal {
   constructor() {
-
     this.elem = this.render();
     this.elem.querySelector(".modal__close").addEventListener("click", this.buttonClose)
     document.addEventListener("keydown", (event) => this.keyHandler(event));
