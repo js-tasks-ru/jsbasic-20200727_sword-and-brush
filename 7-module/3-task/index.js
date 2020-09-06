@@ -9,7 +9,6 @@ export default class StepSlider {
   }
 
   switchEvent(event) {
-    console.log(this.curentStep);
     this.elem.dispatchEvent(new CustomEvent("slider-change", { bubbles: true, detail: this.curentStep }));
   }
 
