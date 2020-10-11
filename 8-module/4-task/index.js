@@ -107,7 +107,6 @@ export default class Cart {
     document.body.classList.add("is-modal-open");
     let divModal = document.createElement("div");
     divModal.classList.add("modal");
-
     divModal.insertAdjacentHTML("afterbegin", `
     <div class="modal__overlay"></div>
     <div class="modal__inner">
@@ -135,7 +134,6 @@ export default class Cart {
 
     let counter = (event) => {
       if (event.target.closest(".cart-counter__button_minus")) {
-        console.log(this.cartItems);
         this.targetId = event.target.closest(".cart-product").getAttribute("data-product-id");
 
         for (let elem of this.cartItems) {
@@ -147,7 +145,6 @@ export default class Cart {
       }
 
       if (event.target.closest(".cart-counter__button_plus")) {
-        console.log(this.cartItems);
         this.targetId = event.target.closest(".cart-product").getAttribute("data-product-id");
 
         for (let elem of this.cartItems) {
