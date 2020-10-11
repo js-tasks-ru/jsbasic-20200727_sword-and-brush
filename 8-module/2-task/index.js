@@ -14,7 +14,6 @@ export default class ProductGrid {
   updateFilter(filters) {
 
     Object.assign(this.filters, filters)
-    console.log(this.filters);
 
     let cards = () => {
       this.elem.innerHTML = "";
