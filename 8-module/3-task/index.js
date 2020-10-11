@@ -24,7 +24,6 @@ export default class Cart {
     if (this.cartItems[targetIndex].count === 0) {
       this.cartItems.splice(targetIndex, 1);
     }
-    console.log(this.cartItems);
 
     this.onProductUpdate(this.cartItems);
   }
@@ -55,4 +54,3 @@ export default class Cart {
     this.cartIcon.update(this);
   }
 }
-
