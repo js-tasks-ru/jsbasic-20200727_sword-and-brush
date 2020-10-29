@@ -17,6 +17,7 @@ export default class ProductGrid {
       let eventCustome = new CustomEvent("product-add", { bubbles: true, detail: Id });
       this.elem.dispatchEvent(eventCustome);
     }
+
   }
 
   updateFilter(filters) {

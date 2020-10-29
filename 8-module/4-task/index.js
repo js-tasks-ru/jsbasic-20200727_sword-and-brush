@@ -219,7 +219,6 @@ export default class Cart {
     this.cartIcon.elem.onclick = () => this.renderModal();
   }
 
-
   close() {
     document.body.classList.remove("is-modal-open");
     if (document.querySelector(".modal")) {
