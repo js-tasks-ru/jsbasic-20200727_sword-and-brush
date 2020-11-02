@@ -2,64 +2,58 @@ import createElement from '../../assets/lib/create-element.js';
 
 export default class Carousel {
 
-  get elem() {
-    return this._elem;
-  }
-
   constructor(slides) {
-
     this.slides = slides;
-    this._elem = this.render(this.slides);
-    this._elem.addEventListener("click", (event) => this.onClick(event));
+    this.elem = this.render(this.slides);
+    this.elem.addEventListener("click", (event) => this.onClick(event));
 
-    this._value = 0;
-    this._curentSlide = 1;
+    this.value = 0;
+    this.curentSlide = 1;
 
-    this._slideLenght = this._elem.querySelectorAll(".carousel__slide");
+    this.slideLenght = this.elem.querySelectorAll(".carousel__slide");
+    this.left = this.elem.querySelector(".carousel__arrow_left");
+    this.right = this.elem.querySelector(".carousel__arrow_right");
 
-    this._left = this._elem.querySelector(".carousel__arrow_left");
-    this._right = this._elem.querySelector(".carousel__arrow_right");
+    this.left.style.display = "none";
 
-    this._left.style.display = "none";
-
-    this._elem.addEventListener("click", (event) => this.slider(event));
+    this.elem.addEventListener("click", (event) => this.slider(event));
   }
 
   slider(event) {
-    let counter = this._elem.querySelector(".carousel__inner").offsetWidth;
+    let counter = this.elem.querySelector(".carousel__inner").offsetWidth;
 
     if (event.target.closest(".carousel__arrow_left")) {
-      this._elem.querySelector(".carousel__inner").style.transform = `translateX(${this._value += counter}px)`;
-      this._curentSlide -= 1;
+      this.elem.querySelector(".carousel__inner").style.transform = `translateX(${this.value += counter}px)`;
+      this.curentSlide -= 1;
 
-      if (this._curentSlide === 1) {
-        this._left.style.display = "none";
+      if (this.curentSlide === 1) {
+        this.left.style.display = "none";
       }
-      else if (this._curentSlide !== this._slideLenght.length) {
-        this._right.style.display = "";
+      else if (this.curentSlide !== this.slideLenght.length) {
+        this.right.style.display = "";
       } else {
-        this._left.style.display = "";
+        this.left.style.display = "";
       }
     }
 
     if (event.target.closest(".carousel__arrow_right")) {
-      this._elem.querySelector(".carousel__inner").style.transform = `translateX(${this._value -= counter}px)`;
-      this._curentSlide += 1;
+      this.elem.querySelector(".carousel__inner").style.transform = `translateX(${this.value -= counter}px)`;
+      this.curentSlide += 1;
 
-      if (this._curentSlide === this._slideLenght.length) {
-        this._right.style.display = "none";
-      } else if (this._curentSlide !== 1) {
-        this._left.style.display = "";
+      if (this.curentSlide === this.slideLenght.length) {
+        this.right.style.display = "none";
+      } else if (this.curentSlide !== 1) {
+        this.left.style.display = "";
       } else {
-        this._right.style.display = "";
+        this.right.style.display = "";
       }
     }
   }
 
   onClick(event) {
     if (event.target.closest(".carousel__button")) {
-      let event = new CustomEvent("product-add", { bubbles: true, detail: this.slides[0].id });
-      this._elem.dispatchEvent(event);
+      let customEvent = new CustomEvent("product-add", { bubbles: true, detail: this.slides[this.curentSlide - 1].id });
+      this.elem.dispatchEvent(customEvent);
     }
   }
 

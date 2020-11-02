@@ -6,8 +6,17 @@ export default class ProductGrid {
     this.products = products;
     this.filters = {};
     this.elem = this.render(this.products);
+    this.elem.addEventListener("click", (event) => this.onClick(event));
     this.gridInner = "";
     this.cardsArr = [];
+  }
+
+  onClick(event) {
+    if (event.target.closest(".card__button")) {
+      let Id = event.target.closest(".card").getAttribute("id");
+      let eventCustome = new CustomEvent("product-add", { bubbles: true, detail: Id });
+      this.elem.dispatchEvent(eventCustome);
+    }
 
   }
 

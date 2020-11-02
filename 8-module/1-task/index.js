@@ -5,9 +5,8 @@ export default class CartIcon {
     this.render();
     this.addEventListeners();
     this.initialTopCoord;
-    
   }
-
+  
   render() {
     this.elem = createElement('<div class="cart-icon"></div>');
   }

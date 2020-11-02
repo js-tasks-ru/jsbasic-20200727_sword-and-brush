@@ -162,6 +162,8 @@ export default class Cart {
         this.onSubmit();
       });
     }
+    document.querySelector(".modal__close").addEventListener("click", () => this.buttonClose());
+    document.addEventListener("keydown", (event) => this.keyHandler(event));
   }
 
   onProductUpdate(elem) {
@@ -215,5 +217,38 @@ export default class Cart {
 
   addEventListeners() {
     this.cartIcon.elem.onclick = () => this.renderModal();
+  }
+
+  close() {
+    document.body.classList.remove("is-modal-open");
+    if (document.querySelector(".modal")) {
+      document.querySelector(".modal").remove();
+    }
+
+  }
+
+  buttonClose() {
+    if (document.querySelector(".modal__body-inner")) {
+      this.cartIcon.update(this);
+    }
+
+
+    document.body.classList.remove("is-modal-open");
+    if (document.querySelector(".modal")) {
+      document.querySelector(".modal").remove();
+    }
+  }
+
+  keyHandler(event) {
+    if (document.querySelector(".modal__body-inner")) {
+      this.cartIcon.update(this);
+    }
+
+    if (event.code === "Escape") {
+      document.body.classList.remove("is-modal-open");
+      if (document.querySelector(".modal")) {
+        document.querySelector(".modal").remove();
+      }
+    }
   }
 }
